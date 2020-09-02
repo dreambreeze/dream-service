@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: system
+          uri: http://127.0.0.1:9001
+          predicates:
+            - args=/system/**
+            - Cookie=mycookie,mycookievalue
+
+server:
+  port: 9000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
