@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dreambreeze.server.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.dreambreeze.server.domain.User">
+        <id column="user_id" property="userId" />
+        <result column="role_id" property="roleId" />
+        <result column="name" property="name" />
+        <result column="password" property="password" />
+        <result column="phone" property="phone" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age" />
+        <result column="avatar" property="avatar" />
+        <result column="school" property="school" />
+        <result column="company" property="company" />
+        <result column="profession" property="profession" />
+        <result column="email" property="email" />
+        <result column="address" property="address" />
+        <result column="mark" property="mark" />
+        <result column="birthday" property="birthday" />
+        <result column="rank_id" property="rankId" />
+        <result column="says" property="says" />
+        <result column="introduction" property="introduction" />
+        <result column="last_login_ip" property="lastLoginIp" />
+        <result column="register_time" property="registerTime" />
+        <result column="register_ip" property="registerIp" />
+        <result column="last_update_time" property="lastUpdateTime" />
+        <result column="locked" property="locked" />
+        <result column="freeze" property="freeze" />
+        <result column="power" property="power" />
+        <result column="create_by" property="createBy" />
+        <result column="create_at" property="createAt" />
+        <result column="update_at" property="updateAt" />
+        <result column="delete_at" property="deleteAt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, role_id, name, password, phone, gender, age, avatar, school, company, profession, email, address, mark, birthday, rank_id, says, introduction, last_login_ip, register_time, register_ip, last_update_time, locked, freeze, power, create_by, create_at, update_at, delete_at
+    </sql>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dreambreeze.server.mapper.PhotosMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.dreambreeze.server.domain.Photos">
+        <id column="photo_id" property="photoId" />
+        <result column="photo_name" property="photoName" />
+        <result column="photo_src" property="photoSrc" />
+        <result column="photo_description" property="photoDescription" />
+        <result column="sort_id" property="sortId" />
+        <result column="view_num" property="viewNum" />
+        <result column="upload_ip" property="uploadIp" />
+        <result column="security" property="security" />
+        <result column="create_by" property="createBy" />
+        <result column="create_name" property="createName" />
+        <result column="create_at" property="createAt" />
+        <result column="update_at" property="updateAt" />
+        <result column="delete_at" property="deleteAt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        photo_id, photo_name, photo_src, photo_description, sort_id, view_num, upload_ip, security, create_by, create_name, create_at, update_at, delete_at
+    </sql>
+
+</mapper>
