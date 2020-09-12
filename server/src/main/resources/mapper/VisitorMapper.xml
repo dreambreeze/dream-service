@@ -10,7 +10,6 @@
         <result column="where_id" property="whereId" />
         <result column="where_name" property="whereName" />
         <result column="create_by" property="createBy" />
-        <result column="create_name" property="createName" />
         <result column="create_at" property="createAt" />
         <result column="update_at" property="updateAt" />
         <result column="delete_at" property="deleteAt" />
@@ -18,7 +17,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        visitor_id, visitor_ip, user_id, where_id, where_name, create_by, create_name, create_at, update_at, delete_at
+        visitor_id, visitor_ip, user_id, where_id, where_name, create_by, create_at, update_at, delete_at
     </sql>
 
 </mapper>

@@ -8,15 +8,12 @@
         <result column="phone_num" property="phoneNum" />
         <result column="contents" property="contents" />
         <result column="user_id" property="userId" />
-        <result column="create_by" property="createBy" />
         <result column="create_at" property="createAt" />
-        <result column="update_at" property="updateAt" />
-        <result column="delete_at" property="deleteAt" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        message_id, phone_num, contents, user_id, create_by, create_at, update_at, delete_at
+        message_id, phone_num, contents, user_id, create_at
     </sql>
 
 </mapper>

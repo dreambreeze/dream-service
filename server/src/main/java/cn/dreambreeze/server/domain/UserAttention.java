@@ -19,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-07
+ * @since 2020-09-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -29,14 +29,14 @@ public class UserAttention extends Model<UserAttention> {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "自增ID")
+    @ApiModelProperty(value = "用户关注ID")
     @TableId
     private Integer uaId;
 
     @ApiModelProperty(value = "关注用户ID")
     private Long userId;
 
-    @ApiModelProperty(value = "关注用户用")
+    @ApiModelProperty(value = "关注用户名")
     private Long userName;
 
     @ApiModelProperty(value = "创建用户")

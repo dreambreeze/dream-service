@@ -8,7 +8,6 @@
         <result column="photo_name" property="photoName" />
         <result column="photo_src" property="photoSrc" />
         <result column="photo_description" property="photoDescription" />
-        <result column="sort_id" property="sortId" />
         <result column="view_num" property="viewNum" />
         <result column="upload_ip" property="uploadIp" />
         <result column="security" property="security" />
@@ -21,7 +20,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        photo_id, photo_name, photo_src, photo_description, sort_id, view_num, upload_ip, security, create_by, create_name, create_at, update_at, delete_at
+        photo_id, photo_name, photo_src, photo_description, view_num, upload_ip, security, create_by, create_name, create_at, update_at, delete_at
     </sql>
 
 </mapper>

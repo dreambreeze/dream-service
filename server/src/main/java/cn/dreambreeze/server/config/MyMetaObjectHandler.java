@@ -1,6 +1,6 @@
 package cn.dreambreeze.server.config;
 
-import cn.dreambreeze.server.utils.DreamUtils;
+import cn.dreambreeze.server.utils.CommonUtils;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
 import org.slf4j.Logger;
@@ -21,13 +21,13 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         LOGGER.info("start insert fill ...");
         fillStrategy(metaObject, "createBy", 1L);
-        fillStrategy(metaObject, "createAt", DreamUtils.getUTCTimestamp());
+        fillStrategy(metaObject, "createAt", CommonUtils.getUTCTimestamp());
         fillStrategy(metaObject, "updateAt", 0L);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         LOGGER.info("start insert fill ...");
-        fillStrategy(metaObject, "updateAt", DreamUtils.getUTCTimestamp());
+        fillStrategy(metaObject, "updateAt", CommonUtils.getUTCTimestamp());
     }
 }

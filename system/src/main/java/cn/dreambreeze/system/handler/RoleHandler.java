@@ -3,11 +3,12 @@ package cn.dreambreeze.system.handler;
 import cn.dreambreeze.server.domain.Role;
 import cn.dreambreeze.server.mapper.RoleMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
- * role hanlder
+ * role handler
  *
  * @author dream breeze
  * @date 2020/9/7 22:08
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleHandler {
 
-    @Autowired
+    @Resource
     private RoleMapper roleMapper;
 
     public Integer getCountByRoleName(String roleName) {

@@ -19,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-07
+ * @since 2020-09-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,9 +32,6 @@ public class User extends Model<User> {
     @ApiModelProperty(value = "用户id")
     @TableId
     private Long userId;
-
-    @ApiModelProperty(value = "角色ID")
-    private Long roleId;
 
     @ApiModelProperty(value = "用户名")
     private String name;
@@ -93,17 +90,14 @@ public class User extends Model<User> {
     @ApiModelProperty(value = "用户注册时IP地址")
     private String registerIp;
 
-    @ApiModelProperty(value = "用户上次更新内容时间")
-    private Long lastUpdateTime;
+    @ApiModelProperty(value = "用户最后活跃时间")
+    private Long activeTime;
 
     @ApiModelProperty(value = "是否锁定，0为不锁定，1为锁定")
     private Integer locked;
 
     @ApiModelProperty(value = "是否冻结，0为不冻结，1为冻结")
     private Integer freeze;
-
-    @ApiModelProperty(value = "拥有权限")
-    private String power;
 
     @ApiModelProperty(value = "创建用户")
     @TableField(fill = FieldFill.INSERT)

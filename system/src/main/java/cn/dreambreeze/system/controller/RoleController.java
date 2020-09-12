@@ -1,9 +1,9 @@
 package cn.dreambreeze.system.controller;
 
+import cn.dreambreeze.server.VO.ResultVO;
 import cn.dreambreeze.server.constant.ErrorCodeType;
 import cn.dreambreeze.server.domain.Role;
-import cn.dreambreeze.server.exception.CallRestApiException;
-import cn.dreambreeze.server.model.ResultModel;
+import cn.dreambreeze.server.exception.BusinessException;
 import cn.dreambreeze.server.service.RoleService;
 import cn.dreambreeze.server.utils.ResultBean;
 import cn.dreambreeze.system.handler.RoleHandler;
@@ -41,12 +41,12 @@ public class RoleController {
     private RoleHandler roleHandler;
 
     @GetMapping("/all")
-    public ResultModel<List<Role>> getAllRole() {
+    public ResultVO<List<Role>> getAllRole() {
         return ResultBean.success(roleService.list());
     }
 
     @GetMapping("/list")
-    public ResultModel<PageInfo> getRoleList(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum, @RequestParam("roleName") String roleName) {
+    public ResultVO<PageInfo> getRoleList(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum, @RequestParam("roleName") String roleName) {
         PageHelper.startPage(pageNum, pageSize);
         QueryWrapper<Role> wrapper = new QueryWrapper();
         wrapper.like("role_name", roleName);
@@ -57,25 +57,25 @@ public class RoleController {
     }
 
     @GetMapping("/{roleId}")
-    public ResultModel<Role> getRole(@PathVariable("roleId") String roleId) {
+    public ResultVO<Role> getRole(@PathVariable("roleId") String roleId) {
         return ResultBean.success(roleService.getById(roleId));
     }
 
     @PostMapping
-    public ResultModel<Object> addRole(@RequestBody Role role) {
+    public ResultVO<Object> addRole(@RequestBody Role role) {
         if (roleHandler.getCountByRoleName(role.getRoleName()) > 0) {
-            throw new CallRestApiException(ErrorCodeType.ROLE_NAME_EXIST);
+            throw new BusinessException(ErrorCodeType.ROLE_NAME_EXIST);
         }
         return ResultBean.success(roleService.save(role));
     }
 
     @PatchMapping
-    public ResultModel<Boolean> updateRole(@RequestBody Role role) {
+    public ResultVO<Boolean> updateRole(@RequestBody Role role) {
         return ResultBean.success(roleService.updateById(role));
     }
 
     @DeleteMapping("/{roleId}")
-    public ResultModel<Boolean> deleteRole(@PathVariable("roleId") String roleId) {
+    public ResultVO<Boolean> deleteRole(@PathVariable("roleId") String roleId) {
         return ResultBean.success(roleService.removeById(roleId));
     }
 }

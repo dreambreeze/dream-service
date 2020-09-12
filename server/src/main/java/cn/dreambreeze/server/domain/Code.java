@@ -19,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-07
+ * @since 2020-09-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -41,9 +41,6 @@ public class Code extends Model<Code> {
 
     @ApiModelProperty(value = "封面图片的路径")
     private String coverImg;
-
-    @ApiModelProperty(value = "所属分类")
-    private String sort;
 
     @ApiModelProperty(value = "查看次数")
     private Long viewNum;

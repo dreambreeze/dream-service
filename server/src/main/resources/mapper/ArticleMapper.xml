@@ -9,7 +9,6 @@
         <result column="title" property="title" />
         <result column="keyword" property="keyword" />
         <result column="description" property="description" />
-        <result column="sort" property="sort" />
         <result column="cover_img" property="coverImg" />
         <result column="content" property="content" />
         <result column="send_ip" property="sendIp" />
@@ -25,7 +24,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        article_id, view_num, title, keyword, description, sort, cover_img, content, send_ip, top, support, security, create_by, create_name, create_at, update_at, delete_at
+        article_id, view_num, title, keyword, description, cover_img, content, send_ip, top, support, security, create_by, create_name, create_at, update_at, delete_at
     </sql>
 
 </mapper>

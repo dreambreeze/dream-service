@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dreambreeze.server.mapper.SortEntityMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.dreambreeze.server.domain.SortEntity">
+        <id column="sort_entity_id" property="sortEntityId" />
+        <result column="sort_id" property="sortId" />
+        <result column="entity_id" property="entityId" />
+        <result column="create_by" property="createBy" />
+        <result column="create_name" property="createName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        sort_entity_id, sort_id, entity_id, create_by, create_name
+    </sql>
+
+</mapper>

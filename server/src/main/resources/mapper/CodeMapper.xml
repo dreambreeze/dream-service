@@ -8,7 +8,6 @@
         <result column="code_name" property="codeName" />
         <result column="code_url" property="codeUrl" />
         <result column="cover_img" property="coverImg" />
-        <result column="sort" property="sort" />
         <result column="view_num" property="viewNum" />
         <result column="security" property="security" />
         <result column="create_by" property="createBy" />
@@ -20,7 +19,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        code_id, code_name, code_url, cover_img, sort, view_num, security, create_by, create_name, create_at, update_at, delete_at
+        code_id, code_name, code_url, cover_img, view_num, security, create_by, create_name, create_at, update_at, delete_at
     </sql>
 
 </mapper>

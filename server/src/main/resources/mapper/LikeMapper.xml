@@ -5,19 +5,15 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.dreambreeze.server.domain.Like">
         <id column="like_id" property="likeId" />
-        <result column="article_id" property="articleId" />
-        <result column="code_id" property="codeId" />
-        <result column="photo_id" property="photoId" />
-        <result column="user_id" property="userId" />
+        <result column="entity_id" property="entityId" />
         <result column="type" property="type" />
         <result column="create_by" property="createBy" />
         <result column="create_at" property="createAt" />
-        <result column="delete_at" property="deleteAt" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        like_id, article_id, code_id, photo_id, user_id, type, create_by, create_at, delete_at
+        like_id, entity_id, type, create_by, create_at
     </sql>
 
 </mapper>

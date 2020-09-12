@@ -3,7 +3,6 @@ package cn.dreambreeze.server.domain;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
@@ -15,16 +14,16 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 点赞表
+ * 点赞收藏表
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-07
+ * @since 2020-09-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("d_like")
-@ApiModel(value = "Like对象", description = "点赞表")
+@ApiModel(value = "Like对象", description = "点赞收藏表")
 public class Like extends Model<Like> {
 
     private static final long serialVersionUID = 1L;
@@ -33,17 +32,8 @@ public class Like extends Model<Like> {
     @TableId
     private Long likeId;
 
-    @ApiModelProperty(value = "文章ID")
-    private Long articleId;
-
-    @ApiModelProperty(value = "微码ID")
-    private Long codeId;
-
-    @ApiModelProperty(value = "相片ID")
-    private Long photoId;
-
-    @ApiModelProperty(value = "作品用户id")
-    private Long userId;
+    @ApiModelProperty(value = "article_id or code_id  or photo_id")
+    private Long entityId;
 
     @ApiModelProperty(value = "1点赞, 2收藏")
     private Integer type;
@@ -55,10 +45,6 @@ public class Like extends Model<Like> {
     @ApiModelProperty(value = "创建日期")
     @TableField(fill = FieldFill.INSERT)
     private Long createAt;
-
-    @ApiModelProperty(value = "删除日期")
-    @TableLogic
-    private Long deleteAt;
 
 
     @Override

@@ -19,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-07
+ * @since 2020-09-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -35,9 +35,6 @@ public class Role extends Model<Role> {
 
     @ApiModelProperty(value = "角色名")
     private String roleName;
-
-    @ApiModelProperty(value = "拥有权限")
-    private String power;
 
     @ApiModelProperty(value = "创建用户")
     @TableField(fill = FieldFill.INSERT)

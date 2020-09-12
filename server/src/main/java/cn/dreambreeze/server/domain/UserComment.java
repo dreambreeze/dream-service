@@ -19,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-07
+ * @since 2020-09-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -33,18 +33,6 @@ public class UserComment extends Model<UserComment> {
     @TableId
     private Long commentId;
 
-    @ApiModelProperty(value = "收到评论的用户ID")
-    private Long userId;
-
-    @ApiModelProperty(value = "文章ID")
-    private Long articleId;
-
-    @ApiModelProperty(value = "微码ID")
-    private Long codeId;
-
-    @ApiModelProperty(value = "相片ID")
-    private Long photoId;
-
     @ApiModelProperty(value = "评论内容")
     private String commitContent;
 
@@ -54,12 +42,12 @@ public class UserComment extends Model<UserComment> {
     @ApiModelProperty(value = "评论时的IP地址")
     private String commitIp;
 
+    @ApiModelProperty(value = "article_id or code_id  or photo_id")
+    private Long entityId;
+
     @ApiModelProperty(value = "创建用户")
     @TableField(fill = FieldFill.INSERT)
     private Long createBy;
-
-    @ApiModelProperty(value = "创建用户名")
-    private String createName;
 
     @ApiModelProperty(value = "创建日期")
     @TableField(fill = FieldFill.INSERT)

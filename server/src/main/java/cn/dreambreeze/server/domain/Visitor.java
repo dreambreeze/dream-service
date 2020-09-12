@@ -19,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-07
+ * @since 2020-09-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -48,9 +48,6 @@ public class Visitor extends Model<Visitor> {
     @ApiModelProperty(value = "创建用户")
     @TableField(fill = FieldFill.INSERT)
     private Long createBy;
-
-    @ApiModelProperty(value = "创建用户名")
-    private String createName;
 
     @ApiModelProperty(value = "创建日期")
     @TableField(fill = FieldFill.INSERT)

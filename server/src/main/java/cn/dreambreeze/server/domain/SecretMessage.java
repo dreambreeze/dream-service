@@ -19,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-07
+ * @since 2020-09-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -52,10 +52,6 @@ public class SecretMessage extends Model<SecretMessage> {
     @ApiModelProperty(value = "创建日期")
     @TableField(fill = FieldFill.INSERT)
     private Long createAt;
-
-    @ApiModelProperty(value = "修改日期")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long updateAt;
 
     @ApiModelProperty(value = "删除日期")
     @TableLogic

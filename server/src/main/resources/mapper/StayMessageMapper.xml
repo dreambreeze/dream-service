@@ -9,7 +9,6 @@
         <result column="message_content" property="messageContent" />
         <result column="message_ip" property="messageIp" />
         <result column="create_by" property="createBy" />
-        <result column="create_name" property="createName" />
         <result column="create_at" property="createAt" />
         <result column="update_at" property="updateAt" />
         <result column="delete_at" property="deleteAt" />
@@ -17,7 +16,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        stay_id, user_id, message_content, message_ip, create_by, create_name, create_at, update_at, delete_at
+        stay_id, user_id, message_content, message_ip, create_by, create_at, update_at, delete_at
     </sql>
 
 </mapper>

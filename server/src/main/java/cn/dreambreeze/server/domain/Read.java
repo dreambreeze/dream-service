@@ -19,7 +19,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-07
+ * @since 2020-09-12
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -33,17 +33,8 @@ public class Read extends Model<Read> {
     @TableId
     private Long readId;
 
-    @ApiModelProperty(value = "系统通知ID")
-    private Long systemId;
-
-    @ApiModelProperty(value = "私信ID")
-    private Long secretId;
-
-    @ApiModelProperty(value = "评论ID")
-    private Long commentId;
-
-    @ApiModelProperty(value = "留言ID")
-    private Long stayId;
+    @ApiModelProperty(value = "system_id or  secret_id or comment_id or stay_id")
+    private Long entityId;
 
     @ApiModelProperty(value = "创建用户")
     @TableField(fill = FieldFill.INSERT)
