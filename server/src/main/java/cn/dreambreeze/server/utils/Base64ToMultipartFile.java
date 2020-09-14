@@ -1,13 +1,9 @@
 package cn.dreambreeze.server.utils;
 
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Decoder;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.Base64;
 
 /**
  * @author dream breeze
@@ -15,75 +11,70 @@ import java.io.InputStream;
  */
 public class Base64ToMultipartFile implements MultipartFile {
 
-    private final byte[] imgContent;
-    private final String header;
+  private final byte[] imgContent;
+  private final String header;
 
-    public Base64ToMultipartFile(byte[] imgContent, String header) {
-        this.imgContent = imgContent;
-        this.header = header.split(";")[0];
+  public Base64ToMultipartFile(byte[] imgContent, String header) {
+    this.imgContent = imgContent;
+    this.header = header.split(";")[0];
+  }
+
+  public static MultipartFile base64ToMultipart(String base64) {
+    String[] baseStrs = base64.split(",");
+
+    Base64.Decoder decoder = Base64.getDecoder();
+    byte[] b = new byte[0];
+    b = decoder.decode(baseStrs[1]);
+
+    for (int i = 0; i < b.length; ++i) {
+      if (b[i] < 0) {
+        b[i] += 256;
+      }
     }
 
-    public static MultipartFile base64ToMultipart(String base64) {
-        try {
-            String[] baseStrs = base64.split(",");
+    return new Base64ToMultipartFile(b, baseStrs[0]);
+  }
 
-            BASE64Decoder decoder = new BASE64Decoder();
-            byte[] b = new byte[0];
-            b = decoder.decodeBuffer(baseStrs[1]);
+  @Override
+  public String getName() {
+    // TODO - implementation depends on your requirements
+    return System.currentTimeMillis() + Math.random() + "." + header.split("/")[1];
+  }
 
-            for (int i = 0; i < b.length; ++i) {
-                if (b[i] < 0) {
-                    b[i] += 256;
-                }
-            }
+  @Override
+  public String getOriginalFilename() {
+    // TODO - implementation depends on your requirements
+    return System.currentTimeMillis() + (int) Math.random() * 10000 + "." + header.split("/")[1];
+  }
 
-            return new Base64ToMultipartFile(b, baseStrs[0]);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+  @Override
+  public String getContentType() {
+    // TODO - implementation depends on your requirements
+    return header.split(":")[1];
+  }
 
-    @Override
-    public String getName() {
-        // TODO - implementation depends on your requirements
-        return System.currentTimeMillis() + Math.random() + "." + header.split("/")[1];
-    }
+  @Override
+  public boolean isEmpty() {
+    return imgContent == null || imgContent.length == 0;
+  }
 
-    @Override
-    public String getOriginalFilename() {
-        // TODO - implementation depends on your requirements
-        return System.currentTimeMillis() + (int) Math.random() * 10000 + "." + header.split("/")[1];
-    }
+  @Override
+  public long getSize() {
+    return imgContent.length;
+  }
 
-    @Override
-    public String getContentType() {
-        // TODO - implementation depends on your requirements
-        return header.split(":")[1];
-    }
+  @Override
+  public byte[] getBytes() throws IOException {
+    return imgContent;
+  }
 
-    @Override
-    public boolean isEmpty() {
-        return imgContent == null || imgContent.length == 0;
-    }
+  @Override
+  public InputStream getInputStream() throws IOException {
+    return new ByteArrayInputStream(imgContent);
+  }
 
-    @Override
-    public long getSize() {
-        return imgContent.length;
-    }
-
-    @Override
-    public byte[] getBytes() throws IOException {
-        return imgContent;
-    }
-
-    @Override
-    public InputStream getInputStream() throws IOException {
-        return new ByteArrayInputStream(imgContent);
-    }
-
-    @Override
-    public void transferTo(File dest) throws IOException, IllegalStateException {
-        new FileOutputStream(dest).write(imgContent);
-    }
+  @Override
+  public void transferTo(File dest) throws IOException, IllegalStateException {
+    new FileOutputStream(dest).write(imgContent);
+  }
 }

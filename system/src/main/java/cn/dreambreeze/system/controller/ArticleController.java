@@ -9,15 +9,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,54 +17,54 @@ import java.util.List;
  * article controller
  *
  * @author dream breeze
- * @create 2020/9/2 22:53
+ * @date 2020/9/2 22:53
  */
 
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
 
-    @Autowired
-    private ArticleService articleService;
+  @Autowired
+  private ArticleService articleService;
 
-    @Autowired
-    private ArticleHandler articleHandler;
+  @Autowired
+  private ArticleHandler articleHandler;
 
-    @GetMapping("/all")
-    public ResultVO<List<Article>> getAllArticle() {
-        return ResultBean.success(articleService.list());
-    }
+  @GetMapping("/all")
+  public ResultVO<List<Article>> getAllArticle() {
+    return ResultBean.success(articleService.list());
+  }
 
-    @GetMapping("/list")
-    public ResultVO<PageInfo> getArticleList(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum, @RequestParam("articleName") String articleName) {
-        PageHelper.startPage(pageNum, pageSize);
-        QueryWrapper<Article> wrapper = new QueryWrapper();
-        wrapper.like("article_name", articleName);
-        List<Article> articleList = articleService.list(wrapper);
-        PageInfo pageInfo = new PageInfo<>(articleList);
-        pageInfo.setList(articleList);
-        return ResultBean.success(pageInfo);
-    }
+  @GetMapping("/list")
+  public ResultVO<PageInfo> getArticleList(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum, @RequestParam("articleName") String articleName) {
+    PageHelper.startPage(pageNum, pageSize);
+    QueryWrapper<Article> wrapper = new QueryWrapper();
+    wrapper.like("article_name", articleName);
+    List<Article> articleList = articleService.list(wrapper);
+    PageInfo pageInfo = new PageInfo<>(articleList);
+    pageInfo.setList(articleList);
+    return ResultBean.success(pageInfo);
+  }
 
-    @GetMapping("/{articleId}")
-    public ResultVO<Article> getArticle(@PathVariable("articleId") String articleId) {
-        return ResultBean.success(articleService.getById(articleId));
-    }
+  @GetMapping("/{articleId}")
+  public ResultVO<Article> getArticle(@PathVariable("articleId") String articleId) {
+    return ResultBean.success(articleService.getById(articleId));
+  }
 
-    @PostMapping
-    public ResultVO<Article> addArticle(@RequestBody Article article) {
-        article.setCreateName("dream breeze");
-        articleService.save(article);
-        return ResultBean.success(article);
-    }
+  @PostMapping
+  public ResultVO<Article> addArticle(@RequestBody Article article) {
+    article.setCreateName("dream breeze");
+    articleService.save(article);
+    return ResultBean.success(article);
+  }
 
-    @PatchMapping
-    public ResultVO<Boolean> updateArticle(@RequestBody Article article) {
-        return ResultBean.success(articleService.updateById(article));
-    }
+  @PatchMapping
+  public ResultVO<Boolean> updateArticle(@RequestBody Article article) {
+    return ResultBean.success(articleService.updateById(article));
+  }
 
-    @DeleteMapping("/{articleId}")
-    public ResultVO<Boolean> deleteArticle(@PathVariable("articleId") String articleId) {
-        return ResultBean.success(articleService.removeById(articleId));
-    }
+  @DeleteMapping("/{articleId}")
+  public ResultVO<Boolean> deleteArticle(@PathVariable("articleId") String articleId) {
+    return ResultBean.success(articleService.removeById(articleId));
+  }
 }
