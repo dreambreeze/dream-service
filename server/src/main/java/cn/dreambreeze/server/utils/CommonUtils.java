@@ -53,15 +53,4 @@ public class CommonUtils {
     }
   }
 
-  public static String getLoginToken() {
-    StringBuilder shortBuffer = new StringBuilder();
-    String uuid = CommonUtils.getUID();
-    for (int i = 0, l = 16; i < l; i++) {
-      String str = uuid.substring(i * 4, i * 4 + 4);
-      int x = Integer.parseInt(str, 16);
-      shortBuffer.append(chars[x % 0x3E]);
-    }
-    return shortBuffer.toString();
-  }
-
 }

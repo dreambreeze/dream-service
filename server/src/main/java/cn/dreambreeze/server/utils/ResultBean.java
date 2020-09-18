@@ -27,6 +27,6 @@ public final class ResultBean {
 
   public static ResultVO<String> fail(int code, String message) {
     return ResultVO.<String>builder().code(code).message(message)
-      .requestId(CommonUtils.getRequestId("FAIL")).build();
+      .requestId(CommonUtils.getUID()).build();
   }
 }

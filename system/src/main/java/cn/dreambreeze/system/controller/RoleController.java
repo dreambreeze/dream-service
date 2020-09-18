@@ -1,9 +1,9 @@
 package cn.dreambreeze.system.controller;
 
 import cn.dreambreeze.server.VO.ResultVO;
-import cn.dreambreeze.server.constant.ErrorCodeType;
+import cn.dreambreeze.server.constant.ResultCode;
 import cn.dreambreeze.server.domain.Role;
-import cn.dreambreeze.server.exception.BusinessException;
+import cn.dreambreeze.server.exception.CustomException;
 import cn.dreambreeze.server.service.RoleService;
 import cn.dreambreeze.server.utils.ResultBean;
 import cn.dreambreeze.system.handler.RoleHandler;
@@ -56,7 +56,7 @@ public class RoleController {
   @PostMapping
   public ResultVO<Object> addRole(@RequestBody Role role) {
     if (roleHandler.getCountByRoleName(role.getRoleName()) > 0) {
-      throw new BusinessException(ErrorCodeType.ROLE_NAME_EXIST);
+      throw new CustomException(ResultCode.BUSINESS_NAME_EXISTED);
     }
     return ResultBean.success(roleService.save(role));
   }
