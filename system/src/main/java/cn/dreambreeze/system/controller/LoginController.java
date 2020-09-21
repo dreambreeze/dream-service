@@ -4,6 +4,7 @@ import cn.dreambreeze.server.VO.Audience;
 import cn.dreambreeze.server.VO.ResultVO;
 import cn.dreambreeze.server.VO.UserVO;
 import cn.dreambreeze.server.annotation.JwtIgnore;
+import cn.dreambreeze.server.utils.CryptUtil;
 import cn.dreambreeze.server.utils.JwtTokenUtil;
 import cn.dreambreeze.server.utils.ResultBean;
 import cn.dreambreeze.system.handler.UserHandler;
@@ -37,9 +38,8 @@ public class LoginController {
   @PostMapping("/login")
   @JwtIgnore
   public ResultVO login(@RequestBody @Validated UserVO userVO, HttpServletRequest request, HttpServletResponse response) {
-//    userVO.setPassword(DigestUtils.md5DigestAsHex(userVO.getPassword().getBytes()));
+    userVO.setPassword(CryptUtil.decrypt(userVO.getPassword()));
     UserVO resultUser = userHandler.login(userVO);
-
 
     if (audience == null) {
       BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
@@ -47,11 +47,11 @@ public class LoginController {
     }
 
     String token = JwtTokenUtil.createJWT(String.valueOf(resultUser.getUserId()), resultUser.getName(), audience);
-    resultUser.setPassword("");
     Cookie cookie = new Cookie(JwtTokenUtil.AUTH_KEY, token);
     cookie.setMaxAge(7 * 24 * 60 * 60);
     response.addCookie(cookie);
 
+    resultUser.setPassword(CryptUtil.encrypt(resultUser.getPassword()));
     return ResultBean.success(resultUser);
   }
 

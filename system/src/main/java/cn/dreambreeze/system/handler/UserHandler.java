@@ -56,7 +56,6 @@ public class UserHandler {
       String remoteIpAddr = CommonUtils.getRemoteIpAddr(request);
       user = new User();
       BeanUtils.copyProperties(userVO, user);
-      System.out.println(remoteIpAddr);
       user.setRegisterIp(remoteIpAddr);
       userMapper.insert(user);
     }

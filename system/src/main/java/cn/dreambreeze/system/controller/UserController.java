@@ -5,6 +5,7 @@ import cn.dreambreeze.server.VO.UserVO;
 import cn.dreambreeze.server.annotation.JwtIgnore;
 import cn.dreambreeze.server.domain.User;
 import cn.dreambreeze.server.service.UserService;
+import cn.dreambreeze.server.utils.CryptUtil;
 import cn.dreambreeze.server.utils.ResultBean;
 import cn.dreambreeze.system.handler.UserHandler;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -52,6 +53,10 @@ public class UserController {
 
   @GetMapping("/{userId}")
   public ResultVO getUser(@PathVariable("userId") String userId) {
+    User user = userService.getById(userId);
+    if (null != user) {
+      user.setPassword(CryptUtil.encrypt(user.getPassword()));
+    }
     return ResultBean.success(userService.getById(userId));
   }
 
@@ -62,6 +67,7 @@ public class UserController {
 
   @PatchMapping
   public ResultVO updateUser(@RequestBody @Validated UserVO userVO) {
+    userVO.setPassword(CryptUtil.decrypt(userVO.getPassword()));
     User user = new User();
     BeanUtils.copyProperties(userVO, user);
     return ResultBean.success(userService.updateById(user));
@@ -75,6 +81,9 @@ public class UserController {
   @PostMapping("/register")
   @JwtIgnore
   public ResultVO register(HttpServletRequest request, @RequestBody @Validated UserVO userVO) {
-    return ResultBean.success(userHandler.register(request, userVO));
+    userVO.setPassword(CryptUtil.decrypt(userVO.getPassword()));
+    UserVO register = userHandler.register(request, userVO);
+    register.setPassword(CryptUtil.encrypt(register.getPassword()));
+    return ResultBean.success(register);
   }
 }
