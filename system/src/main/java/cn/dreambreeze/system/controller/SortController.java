@@ -1,7 +1,7 @@
 package cn.dreambreeze.system.controller;
 
 import cn.dreambreeze.server.VO.ResultVO;
-import cn.dreambreeze.server.VO.SortVO;
+import cn.dreambreeze.server.VO.res.SortResVO;
 import cn.dreambreeze.server.domain.Sort;
 import cn.dreambreeze.server.service.SortService;
 import cn.dreambreeze.server.utils.ResultBean;
@@ -54,14 +54,14 @@ public class SortController {
   }
 
   @PostMapping
-  public ResultVO addSort(@RequestBody @Validated SortVO sort) {
+  public ResultVO addSort(@RequestBody @Validated SortResVO sort) {
     return ResultBean.success(sortHandler.addSort(sort));
   }
 
   @PatchMapping
-  public ResultVO updateSort(@RequestBody @Validated SortVO sortVO) {
+  public ResultVO updateSort(@RequestBody @Validated SortResVO sortResVO) {
     Sort sort = new Sort();
-    BeanUtils.copyProperties(sortVO, sort);
+    BeanUtils.copyProperties(sortResVO, sort);
     return ResultBean.success(sortService.updateById(sort));
   }
 

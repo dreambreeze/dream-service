@@ -1,4 +1,4 @@
-package cn.dreambreeze.server.VO;
+package cn.dreambreeze.server.VO.res;
 
 import lombok.Data;
 
@@ -7,20 +7,14 @@ import lombok.Data;
  * @since 2020-09-12
  */
 @Data
-public class SortVO {
+public class SortResVO {
 
   private Long sortId;
-
   private String sortName;
-
   private Long parentId;
-
   private Integer type;
-
   private String coverImg;
-
   private Long createBy;
-
   private String createName;
 
 }

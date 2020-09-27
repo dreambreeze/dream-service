@@ -1,6 +1,6 @@
 package cn.dreambreeze.system.handler;
 
-import cn.dreambreeze.server.VO.UserVO;
+import cn.dreambreeze.server.VO.res.UserResVO;
 import cn.dreambreeze.server.constant.ResultCode;
 import cn.dreambreeze.server.domain.User;
 import cn.dreambreeze.server.exception.CustomException;
@@ -35,45 +35,45 @@ public class UserHandler {
     return userMapper.selectOne(queryWrapper);
   }
 
-  public UserVO addUser(UserVO userVO) {
-    User user = selectUserByName(userVO.getName());
+  public UserResVO addUser(UserResVO userResVO) {
+    User user = selectUserByName(userResVO.getName());
     if (null != user) {
       throw new CustomException(ResultCode.USER_HAS_EXISTED);
     }
     user = new User();
-    BeanUtils.copyProperties(userVO, user);
+    BeanUtils.copyProperties(userResVO, user);
     userMapper.insert(user);
-    BeanUtils.copyProperties(user, userVO);
-    return userVO;
+    BeanUtils.copyProperties(user, userResVO);
+    return userResVO;
   }
 
-  public UserVO register(HttpServletRequest request, UserVO userVO) {
-    User user = selectUserByName(userVO.getName());
+  public UserResVO register(HttpServletRequest request, UserResVO userResVO) {
+    User user = selectUserByName(userResVO.getName());
     if (null != user) {
-      LOG.warn("User has exist, {}", userVO.getName());
+      LOG.warn("User has exist, {}", userResVO.getName());
       throw new CustomException(ResultCode.USER_HAS_EXISTED);
     } else {
       String remoteIpAddr = CommonUtils.getRemoteIpAddr(request);
       user = new User();
-      BeanUtils.copyProperties(userVO, user);
+      BeanUtils.copyProperties(userResVO, user);
       user.setRegisterIp(remoteIpAddr);
       userMapper.insert(user);
     }
-    BeanUtils.copyProperties(user, userVO);
-    return userVO;
+    BeanUtils.copyProperties(user, userResVO);
+    return userResVO;
   }
 
-  public UserVO login(UserVO userVO) {
-    User user = selectUserByName(userVO.getName());
+  public UserResVO login(UserResVO userResVO) {
+    User user = selectUserByName(userResVO.getName());
     if (null == user) {
-      LOG.warn("User is not exist, {}", userVO.getName());
+      LOG.warn("User is not exist, {}", userResVO.getName());
       throw new CustomException(ResultCode.USER_NOT_EXIST);
     } else {
-      if (userVO.getPassword().equals(user.getPassword())) {
-        BeanUtils.copyProperties(user, userVO);
-        return userVO;
+      if (userResVO.getPassword().equals(user.getPassword())) {
+        BeanUtils.copyProperties(user, userResVO);
+        return userResVO;
       } else {
-        LOG.warn("password is not error, enter password: {}, database password: {}", userVO.getPassword(), user.getPassword());
+        LOG.warn("password is not error, enter password: {}, database password: {}", userResVO.getPassword(), user.getPassword());
         throw new CustomException(ResultCode.USER_LOGIN_ERROR);
       }
     }

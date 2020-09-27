@@ -53,7 +53,6 @@ public class ArticleController {
 
   @PostMapping
   public ResultVO<Article> addArticle(@RequestBody Article article) {
-    article.setCreateName("dream breeze");
     articleService.save(article);
     return ResultBean.success(article);
   }

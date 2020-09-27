@@ -1,6 +1,6 @@
 package cn.dreambreeze.system.handler;
 
-import cn.dreambreeze.server.VO.SortVO;
+import cn.dreambreeze.server.VO.res.SortResVO;
 import cn.dreambreeze.server.constant.ResultCode;
 import cn.dreambreeze.server.domain.Sort;
 import cn.dreambreeze.server.exception.CustomException;
@@ -33,16 +33,16 @@ public class SortHandler {
     return sortMapper.selectOne(queryWrapper);
   }
 
-  public SortVO addSort(SortVO sortVO) {
-    Sort sort = selectSortByName(sortVO.getSortName());
+  public SortResVO addSort(SortResVO sortResVO) {
+    Sort sort = selectSortByName(sortResVO.getSortName());
     if (null != sort) {
       throw new CustomException(ResultCode.SORT_HAS_EXISTED);
     }
     sort = new Sort();
-    BeanUtils.copyProperties(sortVO, sort);
+    BeanUtils.copyProperties(sortResVO, sort);
     sortMapper.insert(sort);
-    BeanUtils.copyProperties(sort, sortVO);
-    return sortVO;
+    BeanUtils.copyProperties(sort, sortResVO);
+    return sortResVO;
   }
 
 }

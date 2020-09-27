@@ -1,7 +1,7 @@
 package cn.dreambreeze.server.utils;
 
 
-import cn.dreambreeze.server.VO.UserVO;
+import cn.dreambreeze.server.VO.res.UserResVO;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -68,11 +68,11 @@ public class CommonUtils {
     return authToken;
   }
 
-  public UserVO getUserByRequest(HttpServletRequest request) {
+  public UserResVO getUserByRequest(HttpServletRequest request) {
     String authToken = getAuthTokenByRequest(request);
     JwtTokenUtil.getUserId(authToken, "");
-    UserVO userVO = new UserVO();
+    UserResVO userResVO = new UserResVO();
 
-    return userVO;
+    return userResVO;
   }
 }

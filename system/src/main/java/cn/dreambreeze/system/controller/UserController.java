@@ -1,7 +1,7 @@
 package cn.dreambreeze.system.controller;
 
 import cn.dreambreeze.server.VO.ResultVO;
-import cn.dreambreeze.server.VO.UserVO;
+import cn.dreambreeze.server.VO.res.UserResVO;
 import cn.dreambreeze.server.annotation.JwtIgnore;
 import cn.dreambreeze.server.domain.User;
 import cn.dreambreeze.server.service.UserService;
@@ -61,15 +61,15 @@ public class UserController {
   }
 
   @PostMapping
-  public ResultVO addUser(@RequestBody @Validated UserVO user) {
+  public ResultVO addUser(@RequestBody @Validated UserResVO user) {
     return ResultBean.success(userHandler.addUser(user));
   }
 
   @PatchMapping
-  public ResultVO updateUser(@RequestBody @Validated UserVO userVO) {
-    userVO.setPassword(CryptUtil.decrypt(userVO.getPassword()));
+  public ResultVO updateUser(@RequestBody @Validated UserResVO userResVO) {
+    userResVO.setPassword(CryptUtil.decrypt(userResVO.getPassword()));
     User user = new User();
-    BeanUtils.copyProperties(userVO, user);
+    BeanUtils.copyProperties(userResVO, user);
     return ResultBean.success(userService.updateById(user));
   }
 
@@ -80,9 +80,9 @@ public class UserController {
 
   @PostMapping("/register")
   @JwtIgnore
-  public ResultVO register(HttpServletRequest request, @RequestBody @Validated UserVO userVO) {
-    userVO.setPassword(CryptUtil.decrypt(userVO.getPassword()));
-    UserVO register = userHandler.register(request, userVO);
+  public ResultVO register(HttpServletRequest request, @RequestBody @Validated UserResVO userResVO) {
+    userResVO.setPassword(CryptUtil.decrypt(userResVO.getPassword()));
+    UserResVO register = userHandler.register(request, userResVO);
     register.setPassword(CryptUtil.encrypt(register.getPassword()));
     return ResultBean.success(register);
   }

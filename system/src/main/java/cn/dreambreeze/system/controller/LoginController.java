@@ -2,7 +2,7 @@ package cn.dreambreeze.system.controller;
 
 import cn.dreambreeze.server.VO.Audience;
 import cn.dreambreeze.server.VO.ResultVO;
-import cn.dreambreeze.server.VO.UserVO;
+import cn.dreambreeze.server.VO.res.UserResVO;
 import cn.dreambreeze.server.annotation.JwtIgnore;
 import cn.dreambreeze.server.utils.CryptUtil;
 import cn.dreambreeze.server.utils.JwtTokenUtil;
@@ -37,9 +37,9 @@ public class LoginController {
 
   @PostMapping("/login")
   @JwtIgnore
-  public ResultVO login(@RequestBody @Validated UserVO userVO, HttpServletRequest request, HttpServletResponse response) {
-    userVO.setPassword(CryptUtil.decrypt(userVO.getPassword()));
-    UserVO resultUser = userHandler.login(userVO);
+  public ResultVO login(@RequestBody @Validated UserResVO userResVO, HttpServletRequest request, HttpServletResponse response) {
+    userResVO.setPassword(CryptUtil.decrypt(userResVO.getPassword()));
+    UserResVO resultUser = userHandler.login(userResVO);
 
     if (audience == null) {
       BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
