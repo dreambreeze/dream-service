@@ -28,6 +28,7 @@ public enum ResultCode {
   USER_ACCOUNT_FORBIDDEN(20003, "账号已被禁用"),
   USER_NOT_EXIST(20004, "用户不存在"),
   USER_HAS_EXISTED(20005, "用户已存在"),
+  SORT_HAS_EXISTED(20006, "分类已存在"),
 
   /* 业务错误：30001-39999 */
   BUSINESS_GROUP_NO_ALLOWED_DEL(30001, "应用分组已经被应用使用,不能删除"),

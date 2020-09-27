@@ -5,8 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * @Author dream breeze
- * @Date 2020/9/17 15:09
+ * @author dream breeze
+ * @date 2020/9/17 15:09
  */
 @Data
 @ConfigurationProperties(prefix = "audience")

@@ -124,7 +124,7 @@ public class CodeGenerator {
     strategy.setNaming(NamingStrategy.underline_to_camel);
     strategy.setColumnNaming(NamingStrategy.underline_to_camel);
 //    strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
-//    strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
+    strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
     strategy.setEntityLombokModel(true);
     strategy.setRestControllerStyle(true);
     strategy.setTablePrefix("d_");

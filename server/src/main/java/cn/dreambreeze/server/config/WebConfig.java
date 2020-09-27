@@ -15,8 +15,8 @@ import org.springframework.web.servlet.config.annotation.*;
 import java.util.List;
 
 /**
- * @Author dream breeze
- * @Date 2020/9/17 17:11
+ * @author dream breeze
+ * @date 2020/9/17 17:11
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {

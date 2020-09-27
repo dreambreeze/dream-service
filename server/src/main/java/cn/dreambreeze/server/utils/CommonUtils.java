@@ -1,6 +1,9 @@
 package cn.dreambreeze.server.utils;
 
 
+import cn.dreambreeze.server.VO.UserVO;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -54,4 +57,22 @@ public class CommonUtils {
     }
   }
 
+  public String getAuthTokenByRequest(HttpServletRequest request) {
+    Cookie[] cookies = request.getCookies();
+    String authToken = "";
+    for (Cookie cookie : cookies) {
+      if (JwtTokenUtil.AUTH_KEY.equals(cookie.getName())) {
+        authToken = cookie.getValue();
+      }
+    }
+    return authToken;
+  }
+
+  public UserVO getUserByRequest(HttpServletRequest request) {
+    String authToken = getAuthTokenByRequest(request);
+    JwtTokenUtil.getUserId(authToken, "");
+    UserVO userVO = new UserVO();
+
+    return userVO;
+  }
 }

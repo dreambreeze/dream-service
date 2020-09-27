@@ -11,8 +11,8 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * @Author dream breeze
- * @Date 2020/9/18 14:56
+ * @author dream breeze
+ * @date 2020/9/18 14:56
  */
 public class CryptUtil {
 

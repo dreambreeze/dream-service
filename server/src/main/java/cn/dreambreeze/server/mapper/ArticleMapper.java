@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author dream breeze
- * @since 2020-09-12
+ * @since 2020-09-22
  */
 public interface ArticleMapper extends BaseMapper<Article> {
 

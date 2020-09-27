@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Author dream breeze
- * @Date 2020/9/17 11:42
+ * @author dream breeze
+ * @date 2020/9/17 11:42
  */
 @RestController
 @RequestMapping("/auth")

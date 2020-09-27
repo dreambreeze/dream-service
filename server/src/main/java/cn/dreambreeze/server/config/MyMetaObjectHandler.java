@@ -21,6 +21,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
   public void insertFill(MetaObject metaObject) {
     LOGGER.info("start insert fill ...");
     fillStrategy(metaObject, "createBy", 1L);
+    fillStrategy(metaObject, "createName", "dream breeze");
     fillStrategy(metaObject, "createAt", CommonUtils.getUTCTimestamp());
     fillStrategy(metaObject, "updateAt", 0L);
   }
