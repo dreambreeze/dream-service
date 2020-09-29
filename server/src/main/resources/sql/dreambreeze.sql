@@ -304,10 +304,8 @@ DROP TABLE IF EXISTS `d_sort_entity`;
 CREATE TABLE `d_sort_entity`
 (
     `sort_entity_id` bigint(20) unsigned NOT NULL COMMENT '分类关系ID',
-    `sort_id`        varchar(60)         NOT NULL COMMENT '分类名称',
+    `sort_id`        bigint(20)          NOT NULL COMMENT '分类ID',
     `entity_id`      bigint(20)          NOT NULL DEFAULT 0 COMMENT 'article_id or code_id  or photo_id or link_id',
-    `create_by`      bigint(20)          NOT NULL COMMENT '创建用户',
-    `create_name`    varchar(255)        NOT NULL COMMENT '创建用户名',
     PRIMARY KEY (`sort_entity_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4

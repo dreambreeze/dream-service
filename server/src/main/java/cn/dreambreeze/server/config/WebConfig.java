@@ -1,6 +1,6 @@
 package cn.dreambreeze.server.config;
 
-import cn.dreambreeze.server.interceptor.JwtInterceptor;
+import cn.dreambreeze.server.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -20,10 +20,10 @@ import java.util.List;
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-  @Bean
-  public JwtInterceptor getInterceptor() {
-    return new JwtInterceptor();
 
+  @Bean
+  public LoginInterceptor getInterceptor() {
+    return new LoginInterceptor();
   }
 
   /**
@@ -32,7 +32,10 @@ public class WebConfig implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     //拦截路径可自行配置多个 可用 ，分隔开
-    registry.addInterceptor(getInterceptor()).addPathPatterns("/**").excludePathPatterns("*/auth/login", "*/user/register");
+    registry.addInterceptor(getInterceptor()).addPathPatterns("/**")
+      .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/swagger-ui.html")
+      .excludePathPatterns("/")
+      .excludePathPatterns("/auth/*", "*/user/register");
   }
 
   /**

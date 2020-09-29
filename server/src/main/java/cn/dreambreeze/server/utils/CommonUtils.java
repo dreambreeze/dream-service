@@ -2,9 +2,12 @@ package cn.dreambreeze.server.utils;
 
 
 import cn.dreambreeze.server.VO.res.UserResVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.UUID;
@@ -17,6 +20,8 @@ import java.util.UUID;
  */
 public class CommonUtils {
 
+  public static final String TOKEN = "token";
+  private static final Logger log = LoggerFactory.getLogger(CommonUtils.class);
   public static String[] chars = new String[]{"a", "b", "c", "d", "e", "f",
     "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
     "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5",
@@ -57,22 +62,16 @@ public class CommonUtils {
     }
   }
 
-  public String getAuthTokenByRequest(HttpServletRequest request) {
+  public static UserResVO getUserByRequest(HttpServletRequest request) {
     Cookie[] cookies = request.getCookies();
-    String authToken = "";
-    for (Cookie cookie : cookies) {
-      if (JwtTokenUtil.AUTH_KEY.equals(cookie.getName())) {
-        authToken = cookie.getValue();
+    UserResVO user = new UserResVO();
+    for (int i = 0, l = cookies.length; i < l; i++) {
+      if (cookies[i].getName().equals(CommonUtils.TOKEN)) {
+        String sessionId = cookies[i].getValue();
+        HttpSession session = request.getSession();
+        user = (UserResVO) session.getAttribute(sessionId);
       }
     }
-    return authToken;
-  }
-
-  public UserResVO getUserByRequest(HttpServletRequest request) {
-    String authToken = getAuthTokenByRequest(request);
-    JwtTokenUtil.getUserId(authToken, "");
-    UserResVO userResVO = new UserResVO();
-
-    return userResVO;
+    return user;
   }
 }

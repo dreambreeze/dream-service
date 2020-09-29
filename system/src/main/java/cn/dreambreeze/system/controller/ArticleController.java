@@ -1,6 +1,7 @@
 package cn.dreambreeze.system.controller;
 
 import cn.dreambreeze.server.VO.ResultVO;
+import cn.dreambreeze.server.VO.req.ArticleReqVO;
 import cn.dreambreeze.server.domain.Article;
 import cn.dreambreeze.server.service.ArticleService;
 import cn.dreambreeze.server.utils.ResultBean;
@@ -11,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -36,7 +38,11 @@ public class ArticleController {
   }
 
   @GetMapping("/list")
-  public ResultVO<PageInfo> getArticleList(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum, @RequestParam("articleName") String articleName) {
+  public ResultVO<PageInfo> getArticleList(
+    @RequestParam("pageSize") Integer pageSize,
+    @RequestParam("pageNum") Integer pageNum,
+    @RequestParam("articleName") String articleName
+  ) {
     PageHelper.startPage(pageNum, pageSize);
     QueryWrapper<Article> wrapper = new QueryWrapper();
     wrapper.like("article_name", articleName);
@@ -47,19 +53,18 @@ public class ArticleController {
   }
 
   @GetMapping("/{articleId}")
-  public ResultVO<Article> getArticle(@PathVariable("articleId") String articleId) {
-    return ResultBean.success(articleService.getById(articleId));
+  public ResultVO getArticle(@PathVariable("articleId") String articleId) {
+    return ResultBean.success(articleHandler.getArticleById(articleId));
   }
 
   @PostMapping
-  public ResultVO<Article> addArticle(@RequestBody Article article) {
-    articleService.save(article);
-    return ResultBean.success(article);
+  public ResultVO addArticle(@RequestBody ArticleReqVO articleReqVO, HttpServletRequest request) {
+    return ResultBean.success(articleHandler.saveArticle(articleReqVO, request));
   }
 
   @PatchMapping
-  public ResultVO<Boolean> updateArticle(@RequestBody Article article) {
-    return ResultBean.success(articleService.updateById(article));
+  public ResultVO updateArticle(@RequestBody ArticleReqVO articleReqVO, HttpServletRequest request) {
+    return ResultBean.success(articleHandler.saveArticle(articleReqVO, request));
   }
 
   @DeleteMapping("/{articleId}")
