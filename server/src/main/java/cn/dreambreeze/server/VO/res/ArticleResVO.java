@@ -2,6 +2,8 @@ package cn.dreambreeze.server.VO.res;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * <p>
  * 文章表
@@ -28,5 +30,8 @@ public class ArticleResVO {
   private String createName;
   private Long createAt;
   private Long updateAt;
+  private Integer pageSize;
+  private Integer pageNum;
+  private List<SortResVO> sortList;
 
 }

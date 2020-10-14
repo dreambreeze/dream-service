@@ -14,6 +14,6 @@ public class PageVO<T> {
   protected List<T> items;
   private Integer pageNum;
   private Integer pageSize;
-  private Integer total;
+  private Long total;
 
 }

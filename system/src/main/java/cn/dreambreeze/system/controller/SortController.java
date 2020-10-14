@@ -33,15 +33,25 @@ public class SortController {
   private SortHandler sortHandler;
 
   @GetMapping("/all")
-  public ResultVO getAllSort() {
-    return ResultBean.success(sortService.list());
+  public ResultVO getAllSort(
+    @RequestParam("type") Integer type
+  ) {
+    QueryWrapper<Sort> queryWrapper = new QueryWrapper<>();
+    queryWrapper.eq("type", type);
+    return ResultBean.success(sortService.list(queryWrapper));
   }
 
   @GetMapping("/list")
-  public ResultVO getSortList(@RequestParam("pageSize") Integer pageSize, @RequestParam("pageNum") Integer pageNum, @RequestParam("sortName") String sortName) {
+  public ResultVO getSortList(
+    @RequestParam("pageSize") Integer pageSize,
+    @RequestParam("pageNum") Integer pageNum,
+    @RequestParam("type") Integer type,
+    @RequestParam("sortName") String sortName
+  ) {
     PageHelper.startPage(pageNum, pageSize);
     QueryWrapper<Sort> wrapper = new QueryWrapper<>();
     wrapper.like("sortName", sortName);
+    wrapper.eq("type", type);
     List<Sort> sortList = sortService.list(wrapper);
     PageInfo<Sort> pageInfo = new PageInfo<>(sortList);
     pageInfo.setList(sortList);

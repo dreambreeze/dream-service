@@ -11,7 +11,7 @@ public class ArticleListReqVO {
 
   private Integer pageNum;
   private Integer pageSize;
-  private String articleId;
-  private String articleName;
+  private String searchKey;
+  private Long sortId;
 
 }

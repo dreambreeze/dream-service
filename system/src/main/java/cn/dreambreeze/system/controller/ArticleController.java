@@ -1,12 +1,13 @@
 package cn.dreambreeze.system.controller;
 
+import cn.dreambreeze.server.VO.PageVO;
 import cn.dreambreeze.server.VO.ResultVO;
 import cn.dreambreeze.server.VO.req.ArticleReqVO;
+import cn.dreambreeze.server.VO.res.ArticleResVO;
 import cn.dreambreeze.server.domain.Article;
 import cn.dreambreeze.server.service.ArticleService;
 import cn.dreambreeze.server.utils.ResultBean;
 import cn.dreambreeze.system.handler.ArticleHandler;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,18 +39,20 @@ public class ArticleController {
   }
 
   @GetMapping("/list")
-  public ResultVO<PageInfo> getArticleList(
-    @RequestParam("pageSize") Integer pageSize,
-    @RequestParam("pageNum") Integer pageNum,
-    @RequestParam("articleName") String articleName
-  ) {
+  public ResultVO getArticleList(@RequestParam("pageSize") Integer pageSize,
+                                 @RequestParam("pageNum") Integer pageNum,
+                                 @RequestParam("sortId") Long sortId,
+                                 @RequestParam("searchKey") String searchKey) {
     PageHelper.startPage(pageNum, pageSize);
-    QueryWrapper<Article> wrapper = new QueryWrapper();
-    wrapper.like("article_name", articleName);
-    List<Article> articleList = articleService.list(wrapper);
-    PageInfo pageInfo = new PageInfo<>(articleList);
-    pageInfo.setList(articleList);
-    return ResultBean.success(pageInfo);
+    List<ArticleResVO> articleList = articleHandler.getArticleList(sortId, searchKey);
+    PageInfo<ArticleResVO> articleResVOPageVO = new PageInfo<>(articleList);
+    articleResVOPageVO.setList(articleList);
+    PageVO<ArticleResVO> articlePageVO = new PageVO<>();
+    articlePageVO.setItems(articleList);
+    articlePageVO.setPageSize(pageSize);
+    articlePageVO.setPageNum(pageNum);
+    articlePageVO.setTotal(articleResVOPageVO.getTotal());
+    return ResultBean.success(articlePageVO);
   }
 
   @GetMapping("/{articleId}")

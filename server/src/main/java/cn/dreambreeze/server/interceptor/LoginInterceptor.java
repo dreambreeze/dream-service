@@ -22,9 +22,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-    if (HttpMethod.GET.equals(request.getMethod())) {
+    if (HttpMethod.GET.name().equals(request.getMethod())) {
       return true;
     }
+
     UserResVO user = CommonUtils.getUserByRequest(request);
     if (ObjectUtils.isEmpty(user)) {
       log.warn("***** user not login ******: " + ResultCode.USER_NOT_LOGGED_IN);

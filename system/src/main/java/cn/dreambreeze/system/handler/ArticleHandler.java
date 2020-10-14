@@ -13,6 +13,7 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * article handler
@@ -28,6 +29,9 @@ public class ArticleHandler {
 
   @Autowired
   private SortEntityHandler sortEntityHandler;
+
+  @Autowired
+  private SortHandler sortHandler;
 
   public ArticleResVO saveArticle(ArticleReqVO articleReqVO, HttpServletRequest request) {
     String remoteIpAddr = CommonUtils.getRemoteIpAddr(request);
@@ -69,5 +73,13 @@ public class ArticleHandler {
     ArticleResVO articleResVO = new ArticleResVO();
     BeanUtils.copyProperties(article, articleResVO);
     return articleResVO;
+  }
+
+  public List<ArticleResVO> getArticleList(Long sortId, String searchKey) {
+    List<ArticleResVO> articleResVOS = articleMapper.getArticleList(sortId, searchKey);
+    for (ArticleResVO article : articleResVOS) {
+      article.setSortList(sortHandler.getSortListByEntityId(article.getArticleId()));
+    }
+    return articleResVOS;
   }
 }

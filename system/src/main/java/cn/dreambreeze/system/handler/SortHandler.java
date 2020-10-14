@@ -12,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * sort handler
@@ -45,4 +46,7 @@ public class SortHandler {
     return sortResVO;
   }
 
+  public List<SortResVO> getSortListByEntityId(Long entityId) {
+    return sortMapper.getSortListByEntityId(entityId);
+  }
 }
