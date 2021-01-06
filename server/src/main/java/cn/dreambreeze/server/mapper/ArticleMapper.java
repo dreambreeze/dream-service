@@ -25,10 +25,13 @@ public interface ArticleMapper extends BaseMapper<Article> {
    */
   @Select(
     "<script>"
-      + "SELECT a.*, se.sort_id"
-      + " FROM d_article as a, d_sort_entity as se"
-      + " WHERE"
-      + " a.article_id = se.entity_id and"
+      + "SELECT"
+      + " distinct se.entity_id, a.*"
+      + " FROM d_article as a"
+      + " LEFT JOIN d_sort_entity as se"
+      + " ON "
+      + " a.article_id = se.entity_id"
+      + " WHERE "
       + "<if test=\"sortId!=null\">"
       + " se.sort_id = #{sortId} and"
       + "</if>"
@@ -38,8 +41,9 @@ public interface ArticleMapper extends BaseMapper<Article> {
       + " or a.content like CONCAT('%',#{searchKey},'%')"
       + ") and"
       + "</if>"
+      + " a.status = 1 and"
       + " a.delete_at = 0"
-      + " order by update_at"
+      + " order by update_at desc"
       + "</script>"
   )
   List<ArticleResVO> getArticleList(Long sortId, String searchKey);

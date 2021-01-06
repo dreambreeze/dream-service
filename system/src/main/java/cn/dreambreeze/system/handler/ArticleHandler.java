@@ -45,7 +45,6 @@ public class ArticleHandler {
     article.setSendIp(remoteIpAddr);
     article.setSecurity(articleReqVO.getSecurity());
     article.setStatus(articleReqVO.getStatus());
-    article.setSupport(articleReqVO.getSecurity());
     article.setTop(articleReqVO.getTop());
     article.setSupport(articleReqVO.getSupport());
     article.setCreateBy(user.getUserId());
@@ -71,6 +70,7 @@ public class ArticleHandler {
   public ArticleResVO getArticleById(String articleId) {
     Article article = articleMapper.selectById(articleId);
     ArticleResVO articleResVO = new ArticleResVO();
+    articleResVO.setSortList(sortHandler.getSortListByEntityId(article.getArticleId()));
     BeanUtils.copyProperties(article, articleResVO);
     return articleResVO;
   }
