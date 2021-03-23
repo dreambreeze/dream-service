@@ -169,14 +169,13 @@ CREATE TABLE `d_visitor`
 DROP TABLE IF EXISTS `d_saying`;
 CREATE TABLE `d_saying`
 (
-    `saying_id`   bigint(20) unsigned NOT NULL COMMENT '箴言D',
-    `author`      varchar(255)        NOT NULL DEFAULT '' COMMENT '作者',
-    `content`     text                NOT NULL COMMENT '内容',
-    `create_by`   bigint(20)          NOT NULL COMMENT '创建用户',
-    `create_name` varchar(255)        NOT NULL COMMENT '创建用户名',
-    `create_at`   bigint(20)          NOT NULL COMMENT '创建日期',
-    `update_at`   bigint(20)          NOT NULL DEFAULT 0 COMMENT '修改日期',
-    `delete_at`   bigint(20)          NOT NULL DEFAULT 0 COMMENT '删除日期',
+    `saying_id` bigint(20) unsigned NOT NULL COMMENT '箴言D',
+    `author`    varchar(255)        NOT NULL DEFAULT '' COMMENT '作者',
+    `content`   text                NOT NULL COMMENT '内容',
+    `create_by` bigint(20)          NOT NULL COMMENT '创建用户',
+    `create_at` bigint(20)          NOT NULL COMMENT '创建日期',
+    `update_at` bigint(20)          NOT NULL DEFAULT 0 COMMENT '修改日期',
+    `delete_at` bigint(20)          NOT NULL DEFAULT 0 COMMENT '删除日期',
     PRIMARY KEY (`saying_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4

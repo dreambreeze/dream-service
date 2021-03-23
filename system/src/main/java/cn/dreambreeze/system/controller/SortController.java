@@ -38,6 +38,7 @@ public class SortController {
   ) {
     QueryWrapper<Sort> queryWrapper = new QueryWrapper<>();
     queryWrapper.eq("type", type);
+    queryWrapper.orderByAsc("sort_name");
     return ResultBean.success(sortService.list(queryWrapper));
   }
 
@@ -50,8 +51,9 @@ public class SortController {
   ) {
     PageHelper.startPage(pageNum, pageSize);
     QueryWrapper<Sort> wrapper = new QueryWrapper<>();
-    wrapper.like("sortName", sortName);
+    wrapper.like("sort_name", sortName);
     wrapper.eq("type", type);
+    wrapper.orderByAsc("sort_name");
     List<Sort> sortList = sortService.list(wrapper);
     PageInfo<Sort> pageInfo = new PageInfo<>(sortList);
     pageInfo.setList(sortList);
